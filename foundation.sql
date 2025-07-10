@@ -13,3 +13,24 @@ ps.PatientId
  ORDER BY 
     ps.AdmittedDate desc, 
     ps.PatientId DESC
+
+SELECT 
+   ps.Hospital
+   ,ps.Ward
+    ,COUNT(ps.patientID) as nu_of_paients
+    ,avg(ps.Tariff) as avg_tariff
+    ,SUM(ps.Tariff) as TotTariff  
+FROM PatientStay ps
+GROUP BY ps.Hospital, ps.Ward
+ORDER BY nu_of_paients desc
+
+SELECT
+    PatientId
+,AdmittedDate
+,ps.Hospital
+,h.Hospital
+,HospitalSize
+FROM
+    PatientStay ps
+    LEFT JOIN DimHospitalBad h
+    ON ps.Hospital = h.Hospital
